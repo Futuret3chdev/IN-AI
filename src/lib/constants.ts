@@ -1,1 +1,1 @@
-export const SESSION_COOKIE = "adept_session";
+export const SESSION_COOKIE = "in_ai_session";

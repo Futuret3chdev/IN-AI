@@ -37,7 +37,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-md rounded-2xl border border-line bg-bg-elev p-8">
         <Link href="/" className="font-serif text-3xl">
-          Adept
+          IN-AI
         </Link>
         <h1 className="mt-6 font-serif text-3xl">
           {mode === "login" ? "Welcome back" : "Create your workspace"}

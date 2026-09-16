@@ -198,7 +198,7 @@ export function ChatPanel({
             {messages.map((message) => (
               <article key={message.id} className="min-w-0">
                 <div className="mb-1 text-[11px] uppercase tracking-widest text-muted">
-                  {message.role === "user" ? "You" : "Adept"}
+                  {message.role === "user" ? "You" : "IN-AI"}
                 </div>
                 {message.role === "user" ? (
                   <p className="whitespace-pre-wrap text-[15px] leading-7">
@@ -275,7 +275,7 @@ export function ChatPanel({
                   ? "What do you want to learn?"
                   : mode === "research"
                     ? "What should I investigate?"
-                    : "Message Adept…"
+                    : "Message IN-AI…"
               }
               className="min-h-[56px] flex-1 resize-none rounded-2xl border border-line bg-bg-elev px-4 py-3 outline-none focus:border-brass"
             />

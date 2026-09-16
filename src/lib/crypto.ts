@@ -9,7 +9,7 @@ function secret() {
 }
 
 function key() {
-  return scryptSync(secret(), "adept-key-v1", 32);
+  return scryptSync(secret(), "in-ai-key-v1", 32);
 }
 
 export function encryptSecret(plain: string) {

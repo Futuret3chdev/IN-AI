@@ -52,24 +52,24 @@ button {
   font: inherit;
 }
 
-.prose-adept h1,
-.prose-adept h2,
-.prose-adept h3 {
+.prose-inai h1,
+.prose-inai h2,
+.prose-inai h3 {
   font-family: var(--font-serif), serif;
   color: var(--ink);
   margin: 1.1em 0 0.4em;
 }
 
-.prose-adept p {
+.prose-inai p {
   margin: 0.6em 0;
 }
 
-.prose-adept ul,
-.prose-adept ol {
+.prose-inai ul,
+.prose-inai ol {
   margin: 0.5em 0 0.5em 1.2em;
 }
 
-.prose-adept code {
+.prose-inai code {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.9em;
   background: var(--bg-hover);
@@ -77,7 +77,7 @@ button {
   border-radius: 4px;
 }
 
-.prose-adept pre {
+.prose-inai pre {
   background: #0a0c10;
   border: 1px solid var(--line);
   padding: 0.9rem;
@@ -86,12 +86,12 @@ button {
   margin: 0.8em 0;
 }
 
-.prose-adept pre code {
+.prose-inai pre code {
   background: transparent;
   padding: 0;
 }
 
-.prose-adept a {
+.prose-inai a {
   color: var(--steel);
   text-decoration: underline;
   text-underline-offset: 3px;

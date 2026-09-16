@@ -81,7 +81,7 @@ export default function MemoryPage() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={3}
-            placeholder="Something Adept should remember…"
+            placeholder="Something IN-AI should remember…"
             className="rounded-xl border border-line bg-bg-elev px-3 py-2 outline-none focus:border-brass"
           />
           <button className="self-start rounded-full bg-brass px-4 py-2 text-sm font-medium text-bg">

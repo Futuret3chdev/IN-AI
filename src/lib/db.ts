@@ -8,7 +8,7 @@ let ready: Promise<void> | null = null;
 function dbPath() {
   const dir = path.join(process.cwd(), "data");
   fs.mkdirSync(dir, { recursive: true });
-  return path.join(dir, "adept.db").replace(/\\/g, "/");
+  return path.join(dir, "in-ai.db").replace(/\\/g, "/");
 }
 
 export function getDb(): Client {
@@ -163,6 +163,28 @@ async function migrate() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS api_keys (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      name TEXT NOT NULL,
+      prefix TEXT NOT NULL,
+      key_hash TEXT NOT NULL UNIQUE,
+      created_at INTEGER NOT NULL,
+      last_used_at INTEGER,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS media (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      kind TEXT NOT NULL,
+      prompt TEXT NOT NULL,
+      mime TEXT NOT NULL,
+      data TEXT,
+      created_at INTEGER NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+
     CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
     CREATE INDEX IF NOT EXISTS idx_conversations_user ON conversations(user_id, updated_at);
     CREATE INDEX IF NOT EXISTS idx_messages_convo ON messages(conversation_id, created_at);
@@ -173,6 +195,8 @@ async function migrate() {
     CREATE INDEX IF NOT EXISTS idx_topics_user ON topics(user_id);
     CREATE INDEX IF NOT EXISTS idx_cards_user_due ON flashcards(user_id, due_at);
     CREATE INDEX IF NOT EXISTS idx_reports_user ON research_reports(user_id, created_at);
+    CREATE INDEX IF NOT EXISTS idx_api_keys_user ON api_keys(user_id);
+    CREATE INDEX IF NOT EXISTS idx_media_user ON media(user_id, created_at);
   `);
 
   try {

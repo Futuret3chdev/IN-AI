@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     model: getModel(user),
     system: systemPrompt(mode, [context]),
     messages: await convertToModelMessages(messages),
-    tools: agentTools(user.id, mode, xai),
+    tools: agentTools(user, mode, xai),
     stopWhen: stepCountIs(8),
     onError({ error: err }) {
       console.error("chat error", err);

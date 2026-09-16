@@ -14,8 +14,11 @@ import {
   upsertTopic,
 } from "./store";
 import type { AgentMode } from "../types";
+import type { User } from "../auth";
+import { generateUserImage } from "../media";
 
-export function agentTools(userId: string, mode: AgentMode, xai: XaiProvider): ToolSet {
+export function agentTools(user: User, mode: AgentMode, xai: XaiProvider): ToolSet {
+  const userId = user.id;
   const custom = {
     saveMemory: tool({
       description:
@@ -95,6 +98,24 @@ export function agentTools(userId: string, mode: AgentMode, xai: XaiProvider): T
       }),
       execute: async ({ title, query, content, sources }) =>
         saveReport({ userId, title, query, content, sources }),
+    }),
+    generateImage: tool({
+      description:
+        "Generate an image with SpaceXAI Imagine. Returns a URL the user can view.",
+      inputSchema: z.object({
+        prompt: z.string().describe("Visual description of the image"),
+        aspectRatio: z
+          .enum(["1:1", "16:9", "9:16", "4:3", "3:4"])
+          .default("1:1"),
+      }),
+      execute: async ({ prompt, aspectRatio }) => {
+        const saved = await generateUserImage(user, prompt, aspectRatio);
+        return {
+          id: saved.id,
+          url: saved.url,
+          markdown: `![${prompt.slice(0, 80)}](${saved.url})`,
+        };
+      },
     }),
   };
 

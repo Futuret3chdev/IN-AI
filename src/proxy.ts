@@ -5,9 +5,12 @@ const PROTECTED = [
   "/chat",
   "/knowledge",
   "/tutor",
+  "/imagine",
+  "/video",
   "/skills",
   "/research",
   "/memory",
+  "/developers",
   "/settings",
 ];
 
@@ -30,9 +33,12 @@ export const config = {
     "/chat/:path*",
     "/knowledge/:path*",
     "/tutor/:path*",
+    "/imagine/:path*",
+    "/video/:path*",
     "/skills/:path*",
     "/research/:path*",
     "/memory/:path*",
+    "/developers/:path*",
     "/settings/:path*",
   ],
 };

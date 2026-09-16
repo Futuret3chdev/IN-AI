@@ -29,7 +29,7 @@ export default function ResearchPage() {
       <div className="mx-auto max-w-3xl">
         <h1 className="font-serif text-4xl">Research</h1>
         <p className="mt-2 text-muted">
-          Ask Adept to investigate, then it files a sourced report here.
+          Ask IN-AI to investigate, then it files a sourced report here.
         </p>
         <form
           className="mt-6 flex gap-2"

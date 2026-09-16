@@ -19,7 +19,7 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Adept — an AI that learns with you",
+  title: "IN-AI — an AI that learns with you",
   description:
     "A multi-user learning agent: tutor, researcher, knowledge companion, and self-improving work agent.",
 };
