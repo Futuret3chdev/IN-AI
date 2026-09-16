@@ -55,8 +55,9 @@ export default function DevelopersPage() {
       <div className="mx-auto max-w-3xl">
         <h1 className="font-serif text-4xl">Developer API</h1>
         <p className="mt-2 text-muted">
-          Full REST API for chat, Imagine, video, speech, memory, knowledge, and skills.
-          Authenticate with a Bearer key. CORS is open.
+          IN-AI developer API for the $MT ECO SYSTEM. Chat, Imagine, video,
+          speech, memory, knowledge, and skills. Authenticate with a Bearer key.
+          Developed by Futuret3ch, T3x and MemeTorrent.
         </p>
 
         <form onSubmit={create} className="mt-8 flex gap-2">

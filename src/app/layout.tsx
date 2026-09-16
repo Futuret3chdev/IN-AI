@@ -19,9 +19,9 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "IN-AI — an AI that learns with you",
+  title: "IN-AI — $MT ECO SYSTEM",
   description:
-    "A multi-user learning agent: tutor, researcher, knowledge companion, and self-improving work agent.",
+    "IN-AI is a learning agent in the $MT ECO SYSTEM. Developed by Futuret3ch, T3x and MemeTorrent.",
 };
 
 export default function RootLayout({

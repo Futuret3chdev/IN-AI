@@ -7,6 +7,8 @@ export function OPTIONS() {
 export function GET() {
   return json({
     name: "IN-AI Developer API",
+    ecosystem: "$MT ECO SYSTEM",
+    developed_by: ["Futuret3ch", "T3x", "MemeTorrent"],
     version: "v1",
     docs: "/developers",
     endpoints: [

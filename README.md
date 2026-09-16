@@ -1,5 +1,7 @@
 # IN-AI
 
+Part of the **$MT ECO SYSTEM**. Developed by **Futuret3ch**, **T3x** and **MemeTorrent**.
+
 - Code: [github.com/Futuret3chdev/IN-AI](https://github.com/Futuret3chdev/IN-AI)
 - Live: [in-ai-futuret3ch.vercel.app](https://in-ai-futuret3ch.vercel.app) · [adept-learning-agent.vercel.app](https://adept-learning-agent.vercel.app)
 - Local: `E:\learning-agent`

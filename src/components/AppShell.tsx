@@ -39,8 +39,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-full">
       <aside className="flex w-56 shrink-0 flex-col border-r border-line bg-bg-elev">
-        <Link href="/" className="px-5 py-5 font-serif text-2xl">
-          IN-AI
+        <Link href="/" className="block px-5 py-5">
+          <span className="font-serif text-2xl">IN-AI</span>
+          <span className="mt-1 block text-[10px] uppercase tracking-[0.16em] text-brass">
+            $MT ECO SYSTEM
+          </span>
         </Link>
         <nav className="flex flex-1 flex-col gap-0.5 px-3">
           {NAV.map((item) => {
@@ -66,6 +69,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button onClick={logout} className="mt-1 text-muted hover:text-ink">
             Log out
           </button>
+          <p className="mt-3 text-[10px] leading-4 text-muted">
+            $MT ECO SYSTEM
+            <br />
+            Futuret3ch · T3x · MemeTorrent
+          </p>
         </div>
       </aside>
       <div className="min-w-0 flex-1">{children}</div>

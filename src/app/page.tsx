@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
+import { Credits } from "@/components/Credits";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +9,12 @@ export default async function Home() {
   return (
     <div className="min-h-full">
       <header className="flex items-center justify-between px-6 py-5 md:px-10">
-        <span className="font-serif text-2xl tracking-tight">IN-AI</span>
+        <div>
+          <span className="font-serif text-2xl tracking-tight">IN-AI</span>
+          <p className="text-[11px] uppercase tracking-[0.18em] text-brass">
+            $MT ECO SYSTEM
+          </p>
+        </div>
         <nav className="flex items-center gap-3 text-sm">
           {user ? (
             <Link
@@ -35,14 +41,15 @@ export default async function Home() {
 
       <main className="mx-auto max-w-5xl px-6 pb-24 pt-10 md:px-10 md:pt-16">
         <p className="mb-4 text-xs uppercase tracking-[0.22em] text-brass">
-          Learning agent
+          $MT ECO SYSTEM · learning agent
         </p>
         <h1 className="max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">
           An AI that remembers you, studies with you, and gets better at the work.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-          IN-AI is a multi-user learning agent with Imagine, video, speech, and a
-          full developer API — powered by SpaceXAI Grok.
+          IN-AI is a multi-user learning agent in the $MT ECO SYSTEM, with
+          Imagine, video, speech, and a developer API — powered by SpaceXAI Grok.
+          Developed by Futuret3ch, T3x and MemeTorrent.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
@@ -96,6 +103,9 @@ export default async function Home() {
           ))}
         </section>
       </main>
+      <footer className="border-t border-line px-6 py-8 md:px-10">
+        <Credits />
+      </footer>
     </div>
   );
 }
