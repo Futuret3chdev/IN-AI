@@ -26,7 +26,8 @@ export async function POST(req: Request) {
     if (!(file instanceof File)) {
       return NextResponse.json({ error: "file required" }, { status: 400 });
     }
-    const text = await file.text();
+    const bytes = Buffer.from(await file.arrayBuffer());
+    const text = bytes.toString("utf8");
     if (!text.trim()) {
       return NextResponse.json(
         { error: "Empty file. Upload text, markdown, csv, or json." },
@@ -39,6 +40,7 @@ export async function POST(req: Request) {
       filename: file.name,
       mime: file.type,
       text,
+      bytes,
     });
     return NextResponse.json(saved);
   }

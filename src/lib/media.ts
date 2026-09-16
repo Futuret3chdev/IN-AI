@@ -1,7 +1,10 @@
+import fs from "node:fs";
+import path from "node:path";
 import { experimental_generateVideo, generateImage } from "ai";
 import type { User } from "./auth";
 import { getImageModel, getVideoModel, xaiKey } from "./ai";
 import { ensureDb, execute, query } from "./db";
+import { extForMime, mediaDir } from "./paths";
 import { now } from "./text";
 
 export type MediaRow = {
@@ -11,6 +14,7 @@ export type MediaRow = {
   prompt: string;
   mime: string;
   data: string | null;
+  path: string | null;
   created_at: number;
 };
 
@@ -23,11 +27,21 @@ export async function saveMedia(input: {
 }) {
   await ensureDb();
   const id = crypto.randomUUID();
+  const ext = extForMime(input.mime);
+  const filePath = path.join(mediaDir(), `${id}.${ext}`);
+  fs.writeFileSync(filePath, Buffer.from(input.base64, "base64"));
   await execute(
-    "INSERT INTO media (id, user_id, kind, prompt, mime, data, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [id, input.userId, input.kind, input.prompt, input.mime, input.base64, now()],
+    "INSERT INTO media (id, user_id, kind, prompt, mime, data, path, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?, ?)",
+    [id, input.userId, input.kind, input.prompt, input.mime, filePath, now()],
   );
-  return { id, kind: input.kind, prompt: input.prompt, mime: input.mime, url: `/api/media/${id}` };
+  return {
+    id,
+    kind: input.kind,
+    prompt: input.prompt,
+    mime: input.mime,
+    url: `/api/media/${id}`,
+    path: filePath,
+  };
 }
 
 export async function getMedia(id: string, userId?: string) {
@@ -39,6 +53,14 @@ export async function getMedia(id: string, userId?: string) {
     userId ? [id, userId] : [id],
   );
   return rows[0] ?? null;
+}
+
+export function readMediaBytes(row: MediaRow) {
+  if (row.path && fs.existsSync(row.path)) {
+    return fs.readFileSync(row.path);
+  }
+  if (row.data) return Buffer.from(row.data, "base64");
+  return null;
 }
 
 export async function listMedia(userId: string, kind?: string) {

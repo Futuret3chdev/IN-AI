@@ -71,7 +71,12 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000), create an account, then open Chat.
 
-Local data lives in `data/in-ai.db` (SQLite / libSQL).
+All local data is written on **E:** under `E:\learning-agent\data\`:
+
+- `in-ai.db` — accounts, chats, memory, skills, tutor
+- `media\` — generated images, video, speech files
+- `knowledge\` — uploaded documents
+- `notes\` — pasted notes
 
 ## Deploy (Vercel)
 

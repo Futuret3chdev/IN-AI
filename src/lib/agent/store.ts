@@ -1,4 +1,7 @@
+import fs from "node:fs";
+import path from "node:path";
 import { ensureDb, execute, query } from "../db";
+import { knowledgeDir, notesDir, safeName } from "../paths";
 import { chunkText, ftsQuery, now } from "../text";
 
 export async function searchMemories(userId: string, q: string, limit = 8) {
@@ -107,20 +110,27 @@ export async function ingestDocument(input: {
   filename?: string;
   mime?: string;
   text: string;
+  bytes?: Buffer;
 }) {
   await ensureDb();
   const id = crypto.randomUUID();
   const created = now();
+  const name = safeName(input.filename || `${input.title}.md`);
+  const filePath = input.bytes
+    ? path.join(knowledgeDir(), `${id}-${name}`)
+    : path.join(notesDir(), `${id}-${safeName(input.title)}.md`);
+  fs.writeFileSync(filePath, input.bytes ?? input.text, input.bytes ? undefined : "utf8");
   await execute(
-    "INSERT INTO documents (id, user_id, title, filename, mime, text, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO documents (id, user_id, title, filename, mime, text, created_at, file_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
     [
       id,
       input.userId,
       input.title,
-      input.filename ?? null,
+      input.filename ?? name,
       input.mime ?? null,
       input.text,
       created,
+      filePath,
     ],
   );
   const chunks = chunkText(input.text);
@@ -162,6 +172,18 @@ export async function deleteDocument(userId: string, id: string) {
     [id, userId],
   );
   if (!owned[0]) return false;
+  const files = await query<{ file_path: string | null }>(
+    "SELECT file_path FROM documents WHERE id = ?",
+    [id],
+  );
+  const disk = files[0]?.file_path;
+  if (disk && fs.existsSync(disk)) {
+    try {
+      fs.unlinkSync(disk);
+    } catch {
+      // keep going
+    }
+  }
   const chunks = await query<{ id: string }>(
     "SELECT id FROM chunks WHERE document_id = ?",
     [id],

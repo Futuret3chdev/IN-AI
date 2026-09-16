@@ -1,15 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
 import { createClient, type Client, type InValue } from "@libsql/client";
+import { dataDir, dbFile } from "./paths";
 
 let client: Client | null = null;
 let ready: Promise<void> | null = null;
-
-function dbPath() {
-  const dir = path.join(process.cwd(), "data");
-  fs.mkdirSync(dir, { recursive: true });
-  return path.join(dir, "in-ai.db").replace(/\\/g, "/");
-}
 
 export function getDb(): Client {
   if (!client) {
@@ -24,7 +17,8 @@ export function getDb(): Client {
         "Production needs a Turso database. Set TURSO_DATABASE_URL and TURSO_AUTH_TOKEN.",
       );
     } else {
-      client = createClient({ url: `file:${dbPath()}` });
+      dataDir();
+      client = createClient({ url: `file:${dbFile()}` });
     }
   }
   return client;
@@ -181,6 +175,7 @@ async function migrate() {
       prompt TEXT NOT NULL,
       mime TEXT NOT NULL,
       data TEXT,
+      path TEXT,
       created_at INTEGER NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
@@ -198,6 +193,17 @@ async function migrate() {
     CREATE INDEX IF NOT EXISTS idx_api_keys_user ON api_keys(user_id);
     CREATE INDEX IF NOT EXISTS idx_media_user ON media(user_id, created_at);
   `);
+
+  for (const sql of [
+    "ALTER TABLE media ADD COLUMN path TEXT",
+    "ALTER TABLE documents ADD COLUMN file_path TEXT",
+  ]) {
+    try {
+      await db.execute(sql);
+    } catch {
+      // column already exists
+    }
+  }
 
   try {
     await db.execute(

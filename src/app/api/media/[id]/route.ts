@@ -1,4 +1,4 @@
-import { getMedia } from "@/lib/media";
+import { getMedia, readMediaBytes } from "@/lib/media";
 
 export async function GET(
   _req: Request,
@@ -6,8 +6,9 @@ export async function GET(
 ) {
   const { id } = await params;
   const row = await getMedia(id);
-  if (!row?.data) return new Response("Not found", { status: 404 });
-  const bytes = Buffer.from(row.data, "base64");
+  if (!row) return new Response("Not found", { status: 404 });
+  const bytes = readMediaBytes(row);
+  if (!bytes) return new Response("Not found", { status: 404 });
   return new Response(bytes, {
     headers: {
       "Content-Type": row.mime,
