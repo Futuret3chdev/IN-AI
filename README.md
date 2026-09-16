@@ -1,7 +1,7 @@
 # IN-AI
 
 - Code: [github.com/Futuret3chdev/IN-AI](https://github.com/Futuret3chdev/IN-AI)
-- Live: [in-ai.vercel.app](https://in-ai.vercel.app)
+- Live: [in-ai-futuret3ch.vercel.app](https://in-ai-futuret3ch.vercel.app) · [adept-learning-agent.vercel.app](https://adept-learning-agent.vercel.app)
 - Local: `E:\learning-agent`
 
 A multi-user **learning agent** with Imagine, video, speech, and a public developer API. The model is SpaceXAI Grok (`grok-4.6`) via the xAI API.
