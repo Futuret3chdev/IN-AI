@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BrandMark } from "./BrandBar";
 
 const NAV = [
   { href: "/chat", label: "Chat" },
@@ -39,12 +40,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-full">
       <aside className="flex w-56 shrink-0 flex-col border-r border-line bg-bg-elev">
-        <Link href="/" className="block px-5 py-5">
-          <span className="font-serif text-2xl">IN-AI</span>
-          <span className="mt-1 block text-[10px] uppercase tracking-[0.16em] text-brass">
-            $MT ECO SYSTEM
-          </span>
-        </Link>
+        <div className="px-3 py-4">
+          <BrandMark compact />
+        </div>
         <nav className="flex flex-1 flex-col gap-0.5 px-3">
           {NAV.map((item) => {
             const active =
@@ -69,11 +67,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button onClick={logout} className="mt-1 text-muted hover:text-ink">
             Log out
           </button>
-          <p className="mt-3 text-[10px] leading-4 text-muted">
-            $MT ECO SYSTEM
-            <br />
-            Futuret3ch · T3x · MemeTorrent
-          </p>
+          <div className="mt-3 space-y-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mt.svg" alt="$MT ECO SYSTEM" className="h-6 w-auto" />
+            <p className="text-[10px] leading-4 text-muted">
+              Futuret3ch · T3x · MemeTorrent
+            </p>
+          </div>
         </div>
       </aside>
       <div className="min-w-0 flex-1">{children}</div>

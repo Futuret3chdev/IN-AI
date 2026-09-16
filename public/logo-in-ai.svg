@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" role="img" aria-label="IN-AI">
+  <rect width="280" height="64" rx="8" fill="#12151c"/>
+  <rect x="1" y="1" width="278" height="62" rx="7" fill="none" stroke="#d4a054" stroke-width="1.5"/>
+  <text x="20" y="42" font-family="Georgia, 'Times New Roman', serif" font-size="32" fill="#efe9dc">IN-AI</text>
+  <text x="148" y="40" font-family="Arial, Helvetica, sans-serif" font-size="11" letter-spacing="2.4" fill="#d4a054">$MT</text>
+</svg>

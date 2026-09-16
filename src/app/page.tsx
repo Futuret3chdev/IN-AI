@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
+import { BrandBar, BrandMark } from "@/components/BrandBar";
 import { Credits } from "@/components/Credits";
 
 export const dynamic = "force-dynamic";
@@ -9,12 +10,7 @@ export default async function Home() {
   return (
     <div className="min-h-full">
       <header className="flex items-center justify-between px-6 py-5 md:px-10">
-        <div>
-          <span className="font-serif text-2xl tracking-tight">IN-AI</span>
-          <p className="text-[11px] uppercase tracking-[0.18em] text-brass">
-            $MT ECO SYSTEM
-          </p>
-        </div>
+        <BrandMark />
         <nav className="flex items-center gap-3 text-sm">
           {user ? (
             <Link
@@ -104,7 +100,8 @@ export default async function Home() {
         </section>
       </main>
       <footer className="border-t border-line px-6 py-8 md:px-10">
-        <Credits />
+        <BrandBar />
+        <Credits className="mt-4" />
       </footer>
     </div>
   );

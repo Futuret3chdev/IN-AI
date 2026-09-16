@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { BrandBar, BrandMark } from "./BrandBar";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const router = useRouter();
@@ -36,12 +37,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   return (
     <div className="flex min-h-full items-center justify-center px-6 py-16">
       <div className="w-full max-w-md rounded-2xl border border-line bg-bg-elev p-8">
-        <Link href="/" className="block">
-          <span className="font-serif text-3xl">IN-AI</span>
-          <span className="mt-1 block text-[11px] uppercase tracking-[0.16em] text-brass">
-            $MT ECO SYSTEM
-          </span>
-        </Link>
+        <BrandMark />
         <h1 className="mt-6 font-serif text-3xl">
           {mode === "login" ? "Welcome back" : "Create your workspace"}
         </h1>
@@ -102,9 +98,9 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             </>
           )}
         </p>
-        <p className="mt-6 text-[11px] leading-4 text-muted">
-          $MT ECO SYSTEM · Developed by Futuret3ch, T3x and MemeTorrent
-        </p>
+        <div className="mt-6">
+          <BrandBar />
+        </div>
       </div>
     </div>
   );
