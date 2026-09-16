@@ -14,7 +14,12 @@ export async function POST(req: Request) {
   const text = String(body?.text ?? "").trim();
   if (!text) return json({ error: "text required" }, 400);
   try {
-    const audio = await generateSpeech(user, text, String(body?.voice ?? "ara"));
+    const audio = await generateSpeech(
+      user,
+      text,
+      String(body?.voice_id ?? body?.voice ?? "eve"),
+      String(body?.language ?? "en"),
+    );
     return json(audio);
   } catch (err) {
     return json({ error: err instanceof Error ? err.message : "Speech failed" }, 500);

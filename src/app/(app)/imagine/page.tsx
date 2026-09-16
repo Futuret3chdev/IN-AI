@@ -45,8 +45,8 @@ export default function ImaginePage() {
       <div className="mx-auto max-w-3xl">
         <h1 className="font-serif text-4xl">Imagine</h1>
         <p className="mt-2 text-muted">
-          Generate images with SpaceXAI Imagine (`grok-imagine-image`). Also available
-          on the developer API as POST /api/v1/images.
+          Generate images with SpaceXAI Imagine (`grok-imagine-image-2.0`). Also
+          available on the developer API as POST /api/v1/images.
         </p>
         <form onSubmit={generate} className="mt-8 flex flex-col gap-3">
           <textarea

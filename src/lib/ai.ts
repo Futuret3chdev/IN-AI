@@ -19,7 +19,7 @@ export function getModel(user: User) {
 }
 
 export function getImageModel(user: User) {
-  return getXai(user).image("grok-imagine-image");
+  return getXai(user).image("grok-imagine-image-2.0");
 }
 
 export function getVideoModel(user: User) {

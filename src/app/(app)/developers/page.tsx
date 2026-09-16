@@ -8,7 +8,7 @@ const ENDPOINTS = [
   { m: "POST", p: "/api/v1/chat", b: '{ "input": "Explain spaced repetition", "mode": "tutor" }' },
   { m: "POST", p: "/api/v1/images", b: '{ "prompt": "brass lamp on a dark desk", "aspect_ratio": "16:9" }' },
   { m: "POST", p: "/api/v1/videos", b: '{ "prompt": "slow camera push-in", "image": "<base64>", "duration": 6 }' },
-  { m: "POST", p: "/api/v1/speech", b: '{ "text": "Welcome to IN-AI", "voice": "ara" }' },
+  { m: "POST", p: "/api/v1/speech", b: '{ "text": "Welcome to IN-AI", "voice_id": "eve", "language": "en" }' },
   { m: "GET", p: "/api/v1/memories", b: "" },
   { m: "POST", p: "/api/v1/memories", b: '{ "kind": "fact", "content": "Prefers short answers" }' },
   { m: "GET", p: "/api/v1/knowledge?q=sm-2", b: "" },

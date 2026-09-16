@@ -8,7 +8,7 @@ export function GET() {
   return json({
     models: [
       { id: "grok-4.6", kind: "text", use: "chat, tutor, research" },
-      { id: "grok-imagine-image", kind: "image", use: "POST /api/v1/images" },
+      { id: "grok-imagine-image-2.0", kind: "image", use: "POST /api/v1/images" },
       { id: "grok-imagine-video-1.5", kind: "video", use: "POST /api/v1/videos" },
     ],
   });

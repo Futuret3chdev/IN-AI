@@ -11,7 +11,12 @@ export async function POST(req: Request) {
   const text = String(body?.text ?? "").trim();
   if (!text) return NextResponse.json({ error: "text required" }, { status: 400 });
   try {
-    const audio = await generateSpeech(user, text, String(body?.voice ?? "ara"));
+    const audio = await generateSpeech(
+      user,
+      text,
+      String(body?.voice_id ?? body?.voice ?? "eve"),
+      String(body?.language ?? "en"),
+    );
     return NextResponse.json(audio);
   } catch (err) {
     return NextResponse.json(

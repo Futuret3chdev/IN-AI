@@ -13,9 +13,12 @@ A multi-user **learning agent** with Imagine, video, speech, and a public develo
 - **Knowledge** — ingest notes/files, answer from your library
 - **Research** — plan, live web search, save a sourced report
 - **Memory** — facts, preferences, goals, and lessons that persist across sessions
-- **Imagine** — generate and edit images (`grok-imagine-image`)
+- **Imagine** — generate and edit images (`grok-imagine-image-2.0`)
 - **Video** — animate a still (`grok-imagine-video-1.5`)
+- **Speech** — text to speech (`POST https://api.x.ai/v1/tts` with `voice_id` and `language`)
 - **Developer API** — Bearer keys at `/developers`, REST under `/api/v1`
+
+Nothing is mocked. Chat, Imagine, video, and speech fail with a real API error if `XAI_API_KEY` is missing.
 
 ## Developer API
 
@@ -38,7 +41,7 @@ curl https://YOUR_HOST/api/v1/images \
 | POST | `/api/v1/chat` | Agent chat (`mode`: work, tutor, research, knowledge) |
 | POST | `/api/v1/images` | Generate or edit an image (`image` = base64 to edit) |
 | POST | `/api/v1/videos` | Image-to-video |
-| POST | `/api/v1/speech` | Text to speech |
+| POST | `/api/v1/speech` | Text to speech (`voice_id`, `language`) |
 | GET | `/api/v1/media` | List generated media |
 | GET/POST | `/api/v1/memories` | Memory |
 | GET/POST | `/api/v1/knowledge` | Document library |
@@ -72,7 +75,12 @@ Local data lives in `data/in-ai.db` (SQLite / libSQL).
 
 ## Deploy (Vercel)
 
-Serverless hosts cannot keep a local SQLite file. Create a free [Turso](https://turso.tech) database, then set:
+`in-ai.vercel.app` is not this project (that alias is already taken). Production is
+[adept-learning-agent.vercel.app](https://adept-learning-agent.vercel.app) and
+[in-ai-futuret3ch.vercel.app](https://in-ai-futuret3ch.vercel.app).
+
+Serverless hosts cannot keep a local SQLite file. Accounts, memory, and media
+**will not persist on Vercel** until you attach Turso and set:
 
 - `XAI_API_KEY`
 - `AUTH_SECRET`

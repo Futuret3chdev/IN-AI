@@ -120,7 +120,12 @@ export async function generateUserVideo(
   });
 }
 
-export async function generateSpeech(user: User, text: string, voice = "ara") {
+export async function generateSpeech(
+  user: User,
+  text: string,
+  voiceId = "eve",
+  language = "en",
+) {
   const apiKey = xaiKey(user);
   const res = await fetch("https://api.x.ai/v1/tts", {
     method: "POST",
@@ -130,35 +135,13 @@ export async function generateSpeech(user: User, text: string, voice = "ara") {
     },
     body: JSON.stringify({
       text,
-      voice,
-      language: "en",
+      voice_id: voiceId,
+      language,
     }),
   });
   if (!res.ok) {
-    const fallback = await fetch("https://api.x.ai/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "grok-tts",
-        input: text,
-        voice,
-      }),
-    });
-    if (!fallback.ok) {
-      const err = await fallback.text();
-      throw new Error(err.slice(0, 400) || "Speech generation failed");
-    }
-    const buf = Buffer.from(await fallback.arrayBuffer());
-    return saveMedia({
-      userId: user.id,
-      kind: "audio",
-      prompt: text,
-      mime: fallback.headers.get("content-type") || "audio/mpeg",
-      base64: buf.toString("base64"),
-    });
+    const err = await res.text();
+    throw new Error(err.slice(0, 400) || `TTS failed (${res.status})`);
   }
   const buf = Buffer.from(await res.arrayBuffer());
   return saveMedia({
