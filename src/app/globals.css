@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0d10;
+  --bg-elev: #12151c;
+  --bg-hover: #1a1f29;
+  --line: #262c38;
+  --ink: #efe9dc;
+  --muted: #8d8a84;
+  --brass: #d4a054;
+  --brass-dim: #8a6a38;
+  --steel: #7eb8c9;
+  --danger: #d36c6c;
+  --ok: #7aad7a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-hover: var(--bg-hover);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brass: var(--brass);
+  --color-brass-dim: var(--brass-dim);
+  --color-steel: var(--steel);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-instrument);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brass) 40%, transparent);
+}
+
+textarea,
+input,
+button {
+  font: inherit;
+}
+
+.prose-adept h1,
+.prose-adept h2,
+.prose-adept h3 {
+  font-family: var(--font-serif), serif;
+  color: var(--ink);
+  margin: 1.1em 0 0.4em;
+}
+
+.prose-adept p {
+  margin: 0.6em 0;
+}
+
+.prose-adept ul,
+.prose-adept ol {
+  margin: 0.5em 0 0.5em 1.2em;
+}
+
+.prose-adept code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--bg-hover);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.prose-adept pre {
+  background: #0a0c10;
+  border: 1px solid var(--line);
+  padding: 0.9rem;
+  overflow-x: auto;
+  border-radius: 10px;
+  margin: 0.8em 0;
+}
+
+.prose-adept pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.prose-adept a {
+  color: var(--steel);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
