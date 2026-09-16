@@ -1,5 +1,9 @@
 # Adept
 
+- Code: [github.com/Futuret3chdev/adept-learning-agent](https://github.com/Futuret3chdev/adept-learning-agent)
+- Live: [adept-learning-agent.vercel.app](https://adept-learning-agent.vercel.app)
+- Local: `E:\learning-agent`
+
 A multi-user **learning agent**: tutor, knowledge companion, researcher, and self-improving work agent. The model is SpaceXAI Grok (`grok-4.6`) via the xAI API.
 
 ## What it does
